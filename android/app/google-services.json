@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "671014162846",
+    "project_id": "platziadvancedflutter",
+    "storage_bucket": "platziadvancedflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671014162846:android:794522a4803b4a310dc68f",
+        "android_client_info": {
+          "package_name": "com.example.platzi_advanced_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671014162846-mr89l8eeds29ij9tdtsagu6jr40d8id0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.platzi_advanced_app",
+            "certificate_hash": "dcc5bb2502851c6416210d0e72ed4f7c3cc64c58"
+          }
+        },
+        {
+          "client_id": "671014162846-7ulk6ngj9eiahkttnebf9n2o9i4ga7o6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ17yvK96ZBsfzd8zKEC0bfKdv3M3iMQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671014162846-7ulk6ngj9eiahkttnebf9n2o9i4ga7o6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
