@@ -12,33 +12,26 @@ class FirebaseAuthAPI {
   Future<User> signIn() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     if (googleSignInAccount == null) {
-        // cancelled login
-        //print('Google Signin ERROR! googleUser: null!');
-        return null;
-      }
+      // cancelled login
+      //print('Google Signin ERROR! googleUser: null!');
+      return null;
+    }
     final GoogleSignInAuthentication gSA =
         await googleSignInAccount.authentication;
 
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-          idToken: gSA.idToken,
-          accessToken: gSA.accessToken);
+        idToken: gSA.idToken, accessToken: gSA.accessToken);
 
-    final UserCredential authResult = await _auth.signInWithCredential(credential);
+    final UserCredential authResult =
+        await _auth.signInWithCredential(credential);
     final User user = authResult.user;
 
     return user;
   }
 
-  // Future<FirebaseUser> signIn() async {
-  //   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  //   GoogleSignInAuthentication gSA = await googleSignInAccount.authentication;
-
-  //   FirebaseUser user = await _auth.signInWithCredential(
-  //     GoogleAuthProvider.credential(
-  //         idToken: gSA.idToken, accessToken: gSA.accessToken
-  //         )
-  //   );
-
-  //   return user;
-  // }
+  signOut() async {
+    await _auth.signOut();//.then((onValue) => print("Sesión cerrada"));
+    googleSignIn.signOut();
+    //print("Sesiones cerradas");
+  }
 }
