@@ -42,9 +42,7 @@ class _SignInScreen extends State<SignInScreen> {
       alignment: Alignment.center,
       children: [
         GradientBack("", null),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          children: [
+        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           // ignore: prefer_const_constructors
           Text("Welcome \n This is your Travel App",
               style: const TextStyle(
@@ -55,7 +53,8 @@ class _SignInScreen extends State<SignInScreen> {
           ButtonGreen(
               text: "Login with Gmail",
               onPressed: () {
-                userBloc.signIn();//.then((User user) => print("El usuario es ${user.displayName}"));
+                userBloc.signOut();
+                userBloc.signIn(); //.then((User user) => print("El usuario es ${user.displayName}"));
               },
               width: 300.0,
               height: 50.0)
