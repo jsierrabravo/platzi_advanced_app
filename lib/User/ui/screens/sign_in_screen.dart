@@ -60,7 +60,7 @@ class _SignInScreen extends State<SignInScreen> {
               child: const Text("Welcome, \nThis is your Travel App",
                   style: TextStyle(
                       fontSize: 37.0,
-                      fontFamily: "Lato",
+                      fontFamily: "Lato", //
                       color: Colors.white,
                       fontWeight: FontWeight.bold)),
             )
