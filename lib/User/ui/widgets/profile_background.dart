@@ -29,7 +29,7 @@ class ProfileBackground extends StatelessWidget {
           width: screenHeight,
           height: screenHeight,
           decoration: BoxDecoration(
-              color: const Color.fromRGBO(0, 0, 0, 0.05),
+              color: const Color.fromRGBO(0, 0, 0, 0.0), // set 0.05 to the O to show the circle
               borderRadius: BorderRadius.circular(screenHeight / 2)
           ),
         ),

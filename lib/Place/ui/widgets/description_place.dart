@@ -11,8 +11,6 @@ class DescriptionPlace extends StatelessWidget {
 
   DescriptionPlace(this.namePlace, this.stars, this.descriptionPlace);
 
-
-
   @override
   Widget build(BuildContext context) {
 

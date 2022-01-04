@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:platzi_advanced_app/User/ui/widgets/user_info.dart';
@@ -38,7 +38,7 @@ class ProfileHeader extends StatelessWidget {
 
   Widget showProfileData(AsyncSnapshot snapshot) {
     if (!snapshot.hasData || snapshot.hasError) {
-      print("No logeado");
+      // print("No logeado");
       return Container(
         margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
         child: Column(
@@ -49,8 +49,8 @@ class ProfileHeader extends StatelessWidget {
         ),
       );
     } else {
-      print("Logeado");
-      print(snapshot.data);
+      // print("Logeado");
+      // print(snapshot.data);
       user = User(
           name: snapshot.data.displayName,
           email: snapshot.data.email,
