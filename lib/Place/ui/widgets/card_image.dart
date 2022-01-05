@@ -3,49 +3,49 @@
 import 'package:flutter/material.dart';
 import 'package:platzi_advanced_app/widgets/floating_action_button_green.dart';
 
-class  CardImage extends StatelessWidget {
+class CardImageWithFabIcon extends StatelessWidget {
+  final double height;
+  final double width;
+  double left ;
+  final String pathImage;
+  final VoidCallback onPressedFabIcon;
+  final IconData iconData;
 
-  String pathImage = "assets/img/beach.jpeg";
-
-  CardImage(this.pathImage);
+  CardImageWithFabIcon({
+    Key key,
+    @required this.pathImage,
+    @required this.width,
+    @required this.height,
+    @required this.onPressedFabIcon,
+    @required this.iconData,
+    this.left
+  });
 
   @override
   Widget build(BuildContext context) {
-
     final card = Container(
-      height: 350.0,
-      width: 250.0,
-      margin: const EdgeInsets.only(
-        top: 80.0,
-        left: 20.0
-
-      ),
-
+      height: height,
+      width: width,
+      margin: EdgeInsets.only(left: left),
       decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-            image: AssetImage(pathImage)
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-        shape: BoxShape.rectangle,
-        boxShadow: const <BoxShadow>[
-          BoxShadow (
-            color:  Colors.black38,
-            blurRadius: 15.0,
-            offset: Offset(0.0, 7.0)
-          )
-        ]
-
-      ),
+          image:
+              DecorationImage(fit: BoxFit.cover, image: AssetImage(pathImage)),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          shape: BoxShape.rectangle,
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+                color: Colors.black38,
+                blurRadius: 15.0,
+                offset: Offset(0.0, 7.0))
+          ]),
     );
 
     return Stack(
-      alignment: const Alignment(0.9,1.1),
+      alignment: const Alignment(0.9, 1.1),
       children: <Widget>[
-        card,
-        FloatingActionButtonGreen()
+        card, 
+        FloatingActionButtonGreen(iconData: iconData, onPressed: onPressedFabIcon)
       ],
     );
   }
-
 }

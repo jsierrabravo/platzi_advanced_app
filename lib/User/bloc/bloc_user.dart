@@ -3,10 +3,12 @@
 import 'dart:async';
 
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:platzi_advanced_app/Place/model/place.dart';
 import 'package:platzi_advanced_app/User/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as FirebaseUser;
 import 'package:platzi_advanced_app/User/repository/cloud_firestore_repository.dart';
 import 'package:platzi_advanced_app/User/model/user.dart';
+import 'package:platzi_advanced_app/User/repository/cloud_firestore_api.dart';
 
 class UserBloc implements Bloc {
   final _auth_repository = AuthRepository();
@@ -19,14 +21,12 @@ class UserBloc implements Bloc {
 
   // casos uso
   // 1. Sign in a la aplicación Google
-  Future<FirebaseUser.User> signIn() {
-    return _auth_repository.signInFirebase();
-  }
+  Future<FirebaseUser.User> signIn() => _auth_repository.signInFirebase();
 
   // 2. Registrar usuario en base de datos
   final _cloudFirestoreRepository = CloudFirestoreRepository();
-  void updateUserData(User user) =>
-      _cloudFirestoreRepository.updateUserDataFirestore(user);
+  void updateUserData(User user) => _cloudFirestoreRepository.updateUserDataFirestore(user);
+  Future<void> updatePlaceData(Place place) => _cloudFirestoreRepository.updatePlaceData(place);
 
   signOut() {
     _auth_repository.signOut();
