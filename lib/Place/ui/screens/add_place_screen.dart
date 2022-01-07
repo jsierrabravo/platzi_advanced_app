@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:platzi_advanced_app/Place/model/place.dart';
@@ -12,6 +13,8 @@ import 'package:platzi_advanced_app/widgets/button_purple.dart';
 import 'package:platzi_advanced_app/widgets/gradient_back.dart';
 import 'package:platzi_advanced_app/widgets/text_input.dart';
 import 'package:platzi_advanced_app/widgets/title_header.dart';
+// ignore: library_prefixes
+import 'package:firebase_auth/firebase_auth.dart' as FirebaseUser;
 
 // ignore: must_be_immutable
 class AddPlaceScreen extends StatefulWidget {
@@ -25,13 +28,11 @@ class AddPlaceScreen extends StatefulWidget {
 }
 
 class _AddPlaceScreen extends State<AddPlaceScreen> {
-
   final _controllerTitlePlace = TextEditingController();
   final _controllerDescriptionPlace = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -63,7 +64,7 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
             Container(
                 alignment: Alignment.center,
                 child: CardImageWithFabIcon(
-                  pathImage: "assets/img/beach_palm.jpeg", //widget.image.path,
+                  pathImage: widget.image.path,
                   iconData: Icons.camera_alt,
                   width: 350.0,
                   height: 250.0,
@@ -88,25 +89,43 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                 child: TextInputLocation(
                     hintText: "Add Location",
                     iconData: Icons.location_on_outlined)),
-            Container(
+            SizedBox(
                 width: 70.0,
                 child: ButtonPurple(
                     buttonText: "Add Place",
                     onPressed: () {
-                      // 1. Firebase Storage
-                      // url-
+                      
+                      // ID del usuario logeado actualmente
+                      userBloc.currentUser.then((FirebaseUser.User user) {
+                        if (user != null) {
+                          String uid = user.uid;
+                          String path = "$uid/${DateTime.now().toString()}.jpg";
+                          // 1. Firebase Storage
+                          // url-
+                          userBloc.uploadFile(path, widget.image).then((UploadTask storageUploadTask) {
+                            storageUploadTask.then((snapshot) {
+                              snapshot.ref.getDownloadURL().then((urlImage) {
+                                //print("URLIMAGE: $urlImage");
+                                // 2. Cloud Firestore
+                                // Place - title, descrpition, url, userOwner, likes
+                                userBloc
+                                    .updatePlaceData(Place(
+                                  name: _controllerTitlePlace.text,
+                                  description: _controllerDescriptionPlace.text,
+                                  urlImage: urlImage,
+                                  likes: 2,
+                                  //urlImage: urlImage
+                                ))
+                                    .whenComplete(() {
+                                  //print("TERMINÓ");
+                                  Navigator.pop(context);
+                                });
+                              });
+                            });
+                          });
+                        }
+                      });
 
-                      // 2. Cloud Firestore
-                      // Place - title, descrpition, url, userOwner, likes
-                      userBloc.updatePlaceData(Place(
-                          name: _controllerTitlePlace.text,
-                          description: _controllerDescriptionPlace.text,
-                          likes: 2,
-                          //urlImage: urlImage
-                        )).whenComplete(() {
-                          print("TERMINÓ");
-                          Navigator.pop(context);
-                        });
                     }))
           ]))
     ]));

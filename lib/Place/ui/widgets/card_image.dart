@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:platzi_advanced_app/widgets/floating_action_button_green.dart';
 
@@ -16,7 +18,7 @@ class CardImageWithFabIcon extends StatelessWidget {
     @required this.pathImage,
     @required this.width,
     @required this.height,
-    @required this.onPressedFabIcon,
+    this.onPressedFabIcon,//@required this.onPressedFabIcon,
     @required this.iconData,
     this.left
   });
@@ -27,9 +29,11 @@ class CardImageWithFabIcon extends StatelessWidget {
       height: height,
       width: width,
       margin: EdgeInsets.only(left: left),
+
       decoration: BoxDecoration(
-          image:
-              DecorationImage(fit: BoxFit.cover, image: AssetImage(pathImage)),
+          image: DecorationImage(
+            fit: BoxFit.cover, 
+            image: FileImage(File(pathImage))), //AssetImage(pathImage)),
           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           shape: BoxShape.rectangle,
           boxShadow: const <BoxShadow>[

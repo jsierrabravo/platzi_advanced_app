@@ -8,10 +8,10 @@ class ButtonPurple extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
 
-  ButtonPurple({
+  const ButtonPurple({
     Key key,
     @required this.buttonText,
-    @required this.onPressed
+    this.onPressed //@required this.onPressed
   });
 
   @override
